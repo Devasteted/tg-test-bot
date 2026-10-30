@@ -1,0 +1,23 @@
+[Unit]
+Description=Telegram bot (demo)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=tgbot
+WorkingDirectory=/opt/tg-bot-demo
+EnvironmentFile=/opt/tg-bot-demo/.env
+ExecStart=/opt/tg-bot-demo/.venv/bin/python -m bot.main
+Restart=always
+RestartSec=5
+
+# Базовое укрепление безопасности
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/tg-bot-demo/data
+
+[Install]
+WantedBy=multi-user.target
